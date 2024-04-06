@@ -18,7 +18,7 @@ public class BoardController {
     @GetMapping("/")
     public String index(HttpServletRequest request) {
         // 조회하기
-        List<Board> boardList = boardNativeRepository.findAll();
+        List<Board> boardList = boardPersistRepository.findAll();
         // 가방에 담기
         request.setAttribute("boardList", boardList);
 
