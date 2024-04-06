@@ -14,6 +14,17 @@ public class BoardPersistRepository {
     private final EntityManager em;
 
     @Transactional
+    public void deleteById(Integer id) {
+        Query query = em.createQuery("delete from Board b where b.id = :id");
+        query.setParameter("id", id);
+
+        query.executeUpdate();
+    }
+    public Board findById(Integer id){
+        Board board = em.find(Board.class, id);
+        return board;
+    }
+    @Transactional
     public Board save (Board board){
         em.persist(board);
         return board;

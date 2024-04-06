@@ -37,7 +37,7 @@ public class BoardController {
 
     @GetMapping("/board/{id}")
     public String detail(@PathVariable Integer id, HttpServletRequest request) {
-        Board board = boardNativeRepository.findById(id);
+        Board board = boardPersistRepository.findById(id);
         request.setAttribute("board", board);
         return "board/detail";
     }
@@ -54,7 +54,7 @@ public class BoardController {
     }
     @PostMapping("/board/{id}/delete")
     public String delete(@PathVariable int id) { // DTO 없이 구현
-        boardNativeRepository.deleteById(id);
+        boardPersistRepository.deleteById(id);
         return "redirect:/";
     }
 }
