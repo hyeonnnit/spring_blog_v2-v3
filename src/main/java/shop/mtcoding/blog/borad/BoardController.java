@@ -43,13 +43,13 @@ public class BoardController {
     }
     @GetMapping("/board/{id}/update-form")
     public String updateForm(@PathVariable Integer id, HttpServletRequest request) {
-        Board board = boardNativeRepository.findById(id);
+        Board board = boardPersistRepository.findById(id);
         request.setAttribute("board", board);
         return "/board/update-form"; // 서버가 내부적으로 index를 요청 - 외부에서는 다이렉트 접근이 안됨
     }
     @PostMapping("/board/{id}/update")
-    public String update(@PathVariable Integer id, String title, String content, String username){
-        boardNativeRepository.updateById(id, title, content, username);
+    public String update(@PathVariable Integer id, BoardRequest.UpdateDTO reqDTO){
+        boardPersistRepository.updateById(id, reqDTO);
         return "redirect:/board/"+id;
     }
     @PostMapping("/board/{id}/delete")

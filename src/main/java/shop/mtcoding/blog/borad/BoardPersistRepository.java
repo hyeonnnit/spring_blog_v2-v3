@@ -14,6 +14,11 @@ public class BoardPersistRepository {
     private final EntityManager em;
 
     @Transactional
+    public void updateById(int id,BoardRequest.UpdateDTO reqDTO) {
+        Board board = findById(id); // 영속화됨
+        board.update(reqDTO);
+    }
+    @Transactional
     public void deleteById(Integer id) {
         Query query = em.createQuery("delete from Board b where b.id = :id");
         query.setParameter("id", id);

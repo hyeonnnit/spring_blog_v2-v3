@@ -28,4 +28,10 @@ public class Board {
         this.content = content;
         this.username = username;
     }
+
+    public void update(BoardRequest.UpdateDTO reqDTO) { // 변경할 데이터를 설정할 setter 만들기
+        this.title = reqDTO.getTitle();
+        this.content = reqDTO.getContent();
+        this.username = reqDTO.getUsername();
+    }
 }
