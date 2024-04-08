@@ -18,6 +18,13 @@ public class BoardRepository {
     private final EntityManager em;
 
     @Transactional
+    public Board updateById(int id,String title, String content){
+        Board board = findById(id);
+        board.setTitle(title);
+        board.setContent(content);
+        return board;
+    }
+    @Transactional
     public void deleteById(int id){
         Query query = em.createQuery("delete from Board b where b.id = :id");
         query.setParameter("id",id);
