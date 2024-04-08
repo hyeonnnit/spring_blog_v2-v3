@@ -11,6 +11,10 @@ import org.springframework.stereotype.Repository;
 public class UserRepository {
     private final EntityManager em;
 
+    public User findById(int id){
+        User user = em.find(User.class, id);
+        return user;
+    }
     @Transactional
     public User save1(String username, String password, String email){
         Query q1 = em.createNativeQuery("insert into user_tb(username, password, email, created_at) values(?, ?, ?, now())");
