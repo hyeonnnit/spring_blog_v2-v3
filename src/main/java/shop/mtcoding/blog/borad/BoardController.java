@@ -18,7 +18,7 @@ public class BoardController {
     @GetMapping("/")
     public String index(HttpServletRequest request) {
         // 조회하기
-        List<Board> boardList = boardPersistRepository.findAll();
+        List<Board> boardList = boardRepository.findAll();
         // 가방에 담기
         request.setAttribute("boardList", boardList);
 
@@ -37,7 +37,7 @@ public class BoardController {
 
     @GetMapping("/board/{id}")
     public String detail(@PathVariable Integer id, HttpServletRequest request) {
-        Board board = boardRepository.findById(id);
+        Board board = boardRepository.findByIdJoinUser(id);
         request.setAttribute("board", board);
         return "board/detail";
     }
