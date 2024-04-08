@@ -13,7 +13,7 @@ import java.util.List;
 @Controller
 public class BoardController {
     private final BoardPersistRepository boardPersistRepository;
-    private final BoardNativeRepository boardNativeRepository;
+    private final BoardRepository boardRepository;
 
     @GetMapping("/")
     public String index(HttpServletRequest request) {
@@ -25,11 +25,11 @@ public class BoardController {
         return "index"; // 서버가 내부적으로 index를 요청 - 외부에서는 다이렉트 접근이 안됨
     }
 
-    @PostMapping("/board/save")
-    public String save(BoardRequest.SaveDTO reqDTO){
-        boardPersistRepository.save(reqDTO.toEntity());
-        return "redirect:/";
-    }
+//    @PostMapping("/board/save")
+//    public String save(BoardRequest.SaveDTO reqDTO){
+//        boardPersistRepository.save(reqDTO.toEntity());
+//        return "redirect:/";
+//    }
     @GetMapping("/board/save-form")
     public String saveForm() {
         return "board/save-form";
@@ -37,7 +37,7 @@ public class BoardController {
 
     @GetMapping("/board/{id}")
     public String detail(@PathVariable Integer id, HttpServletRequest request) {
-        Board board = boardPersistRepository.findById(id);
+        Board board = boardRepository.findById(id);
         request.setAttribute("board", board);
         return "board/detail";
     }

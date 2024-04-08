@@ -16,7 +16,6 @@ public class BoardPersistRepository {
     @Transactional
     public void updateById(int id,BoardRequest.UpdateDTO reqDTO) {
         Board board = findById(id); // 영속화됨
-        board.update(reqDTO);
     }
     @Transactional
     public void deleteById(Integer id) {
