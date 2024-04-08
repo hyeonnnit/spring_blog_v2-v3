@@ -58,7 +58,7 @@ public class BoardController {
     }
     @PostMapping("/board/{id}/delete")
     public String delete(@PathVariable int id) { // DTO 없이 구현
-        boardPersistRepository.deleteById(id);
+        boardRepository.deleteById(id);
         return "redirect:/";
     }
 }
