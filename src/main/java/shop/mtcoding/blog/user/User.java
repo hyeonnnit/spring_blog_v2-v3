@@ -1,26 +1,35 @@
 package shop.mtcoding.blog.user;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
-@Table(name="user_tb")
+@NoArgsConstructor
 @Data
-@Entity //중요함!
-public class User { // use_tb의 내용 DB에 담기
-    @Id // PK
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
-    private int id;
-
-    @Column(unique=true) // 유니크 설정
+@Table(name = "user_tb")
+@Entity
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(unique = true)
     private String username;
-
-    @Column(length = 60, nullable = false) // 길이 조정, 널 불가
     private String password;
     private String email;
 
-    // 카멜 표기법으로 만들면 DB는 created_at 으로 만들어진다. (언더스코어 기법)
-    private LocalDateTime createdAt;
+    @CreationTimestamp // pc -> db (날짜주입)
+    private Timestamp createdAt;
 
+    @Builder
+    public User(Integer id, String username, String password, String email, Timestamp createdAt) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.createdAt = createdAt;
+    }
 }
