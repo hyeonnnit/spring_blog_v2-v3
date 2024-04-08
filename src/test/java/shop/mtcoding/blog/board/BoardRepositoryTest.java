@@ -18,6 +18,18 @@ public class BoardRepositoryTest {
     private BoardRepository boardRepository;
 
     @Test
+    public void findAll1_test(){
+        //given
+
+        //when
+        List<Board> boardList = boardRepository.findAll1();
+        System.out.println("findAll1_test:: 조회완료 쿼리 2번");
+        boardList.forEach(board -> {
+            System.out.println(board);
+        });
+        //then
+    }
+    @Test
     public void findAll_test(){
         //given
 
